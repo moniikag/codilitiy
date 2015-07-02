@@ -1,4 +1,7 @@
-module Solution
+# codility 100%
+
+module FrogJmp
+
   def solution(x,y,d)
     if (y-x) % d != 0
       jumps = (y-x) / d + 1
@@ -7,4 +10,5 @@ module Solution
     end
     return jumps
   end
+
 end

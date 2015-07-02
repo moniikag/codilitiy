@@ -1,4 +1,11 @@
-module Solution
+# codility 100%
+# zero-indexed array
+# N different ingeters in range [1..(N+1)] -> exactly one integer is missing
+# N is an integer within the range [0..100,000];
+# the elements of A are all distinct;
+# each element of array A is an integer within the range [1..(N + 1)].
+
+module PermMissingElem
 
   def solution(a)
     a.sort!

@@ -1,56 +1,45 @@
 require './solution.rb'
-include Solution
+require 'minitest/autorun'
+include FrogJmp
 
-def test(arrays_to_test)
-  general_test_result = true
-  errors=[]
-
-  arrays_to_test.each_with_index do |arr, index|
-    if single_test_result(arr) == false
-      general_test_result = false
-      errors << index+1
-    end
+describe FrogJmp do
+  it "solves correctly codility example" do
+    start_position = 10
+    end_position = 85
+    length_of_jump = 30
+    expected_number_of_jumps = 3
+    assert_equal(solution(start_position, end_position, length_of_jump), expected_number_of_jumps)
   end
 
-  puts "\nfinal result: #{general_test_result}"
-  puts "something went wrong in following tests: #{errors}" if general_test_result == false
-end
-
-def single_test_result(arr)
-  result = single_test(arr)
-  if result == true
-    print '* '
-  else
-    print'! '
+  it "returns correct result if distance is not divisible by length of jump" do
+    start_position = 1
+    end_position = 100
+    length_of_jump = 10
+    expected_number_of_jumps = 10
+    assert_equal(solution(start_position, end_position, length_of_jump), expected_number_of_jumps)
   end
-  return result
+
+  it "returns correct result if distance is divisible by length of jump" do
+    start_position = 3
+    end_position = 9
+    length_of_jump = 3
+    expected_number_of_jumps = 2
+    assert_equal(solution(start_position, end_position, length_of_jump), expected_number_of_jumps)
+  end
+
+  it "returns correct result if exactly one jump needed" do
+    start_position = 4
+    end_position = 9
+    length_of_jump = 5
+    expected_number_of_jumps = 1
+    assert_equal(solution(start_position, end_position, length_of_jump), expected_number_of_jumps)
+  end
+
+  it "returns correct result if distance is smaller then one jump length" do
+    start_position = 55
+    end_position = 90
+    length_of_jump = 100
+    expected_number_of_jumps = 1
+    assert_equal(solution(start_position, end_position, length_of_jump), expected_number_of_jumps)
+  end
 end
-
-def single_test(arr)
-  expect_equal(solution(arr[0],arr[1], arr[2]), arr[3])
-end
-
-def expect_equal(a, b)
-  a == b
-end
-
-#############################################################
-
-# a[0] - start position
-# a[1] - end position
-# a[2] - lenght of jump
-# a[3] - expected number of jumps
-# X, Y and D are integers within the range [1..1,000,000,000];
-# X ≤ Y.
-
-
-
-arrays_to_test = [
-  [10,85,30, 3],     # codility example
-  [1,100,10, 10],
-  [3,9,3, 2],
-  [4,9,3, 2],
-  [55,90,8, 5]
-]
-
-test(arrays_to_test)

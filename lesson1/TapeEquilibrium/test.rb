@@ -1,59 +1,53 @@
 require './solution.rb'
-include Solution
+require 'minitest/autorun'
+include TapeEquilibrium
 
-def test(arrays_to_test)
-  general_test_result = true
-  errors=[]
-
-  arrays_to_test.each_with_index do |arr, index|
-    if single_test_result(arr) == false
-      general_test_result = false
-      errors << index+1
-    end
+describe TapeEquilibrium do
+  it "solves correctly codility example" do
+    array = [3,1,2,4,3]
+    expected_equilibrium = 1
+    assert_equal(solution(array), expected_equilibrium)
   end
 
-  puts "\nfinal result: #{general_test_result}"
-  puts "something went wrong in following tests: #{errors}" if general_test_result == false
-end
-
-def single_test_result(arr)
-  result = single_test(arr)
-  if result == true
-    print '* '
-  else
-    print'! '
+  it "returns correct value for two positive numbers" do
+    array = [1,4]
+    expected_equilibrium = 3
+    assert_equal(solution(array), expected_equilibrium)
   end
-  return result
+
+  it "returns correct value for two negative numbers" do
+    array = [-100,-50]
+    expected_equilibrium = 50
+    assert_equal(solution(array), expected_equilibrium)
+  end
+
+  it "returns correct value for two equal numbers" do
+    array = [5,5]
+    expected_equilibrium = 0
+    assert_equal(solution(array), expected_equilibrium)
+  end
+
+  it "returns correct value for one positive and one negative number" do
+    array = [-100, 50]
+    expected_equilibrium = 150
+    assert_equal(solution(array), expected_equilibrium)
+  end
+
+  it "returns correct value for positive numbers" do
+    array = [1,2,3,4,5,6,7]
+    expected_equilibrium = 2
+    assert_equal(solution(array), expected_equilibrium)
+  end
+
+  it "returns correct value for negative numbers" do
+    array = [-3,-4,-5]
+    expected_equilibrium = 2
+    assert_equal(solution(array), expected_equilibrium)
+  end
+
+  it "returns correct value for positive and negative numbers" do
+    array = [-100,5,-200,80]
+    expected_equilibrium = 15
+    assert_equal(solution(array), expected_equilibrium)
+  end
 end
-
-def single_test(arr)
-  expect_equal(solution(arr[0..-2]), arr[-1])
-end
-
-def expect_equal(a, b)
-  a == b
-end
-
-#############################################################
-
-# non-empty zero-indexed array
-# N integers
-# 0 < P < N
-# N < 2; 100.000 >
-# arr[i] < -1.000; 1000 >
-
-arrays_to_test = [
-  [3,1,2,4,3, 1],           # codility example
-  [1,4, 3],                 # two positive numbers
-  [-100,-50, 50],           # two negative numbers
-  [5,5, 0],                 # two equal numbers
-  [-100, 50, 150],          # positive and negative number
-  [1,2,3,4,5,6,7, 2],       # positive numbers
-  [7,2,1,6,3,4, 3],
-  [10,5,15, 0],
-  [-3,-4,-5, 2],            # negative numbers
-  [-100,5,-200,80, 15],     # positive and negative numbers
-  [10,-5,-15, 20]
-]
-
-test(arrays_to_test)

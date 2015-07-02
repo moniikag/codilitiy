@@ -1,4 +1,11 @@
-module Solution
+# codility 100%
+# non-empty zero-indexed array
+# N integers
+# 0 < P < N
+# N < 2; 100.000 >
+# arr[i] < -1.000; 1000 >
+
+module TapeEquilibrium
 
   def solution(a)
     part1 = a[0]
